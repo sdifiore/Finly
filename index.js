@@ -1,20 +1,23 @@
-const http = require("http");
+const express = require("express");
+const app = express();
 
-const server = http.createServer((req, res) => {
-  const { url } = req;
-  console.log(url);
-  if (url === "/") {
-    res.end("Hello From Node.js");
-  } else if (url === "/contact") {
-    res.end("The Contact Page");
-  } else if (url === "/about") {
-    res.end("The About Page");
-  } else {
-    res.writeHead(404);
-    res.end("Not Found");
-  }
+app.get("/", (req, res) => {
+  res.send("Hello From Node.js");
+});
+app.get("/contact", (req, res) => {
+  res.send("The Contact Page");
 });
 
-server.listen(3000, () => {
-  console.log("Server running on port 3000");
+app.get("/about", (req, res) => {
+  res.send("The About Page");
+});
+
+app.get("*", (req, res) => {
+  res.status(404).send("Page Not Found");
+});
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
