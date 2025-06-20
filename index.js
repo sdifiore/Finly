@@ -4,6 +4,8 @@ const morgan = require("morgan");
 const app = express();
 
 app.use(morgan("dev"));
+app.set("view engine", "ejs");
+app.set("views", "./views");
 
 // Basic error handling middleware
 app.use((err, req, res, next) => {
@@ -17,15 +19,15 @@ app.get("/", (req, res) => {
 });
 
 app.get("/contact", (req, res) => {
-  res.send("The Contact Page");
+  res.render("index", { message: "The Contact Page" });
 });
 
 app.get("/about", (req, res) => {
-  res.send("The About Page");
+  res.render("index", { message: "The About Page" });
 });
 
 app.get("/*", (req, res) => {
-  res.status(404).send("Not Found");
+  res.status(404).render("index", { message: "Not Found" });
 });
 
 const PORT = process.env.PORT || 3000;
