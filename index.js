@@ -15,7 +15,7 @@ app.use((err, req, res, next) => {
 
 // Basic routes
 app.get("/", (req, res) => {
-  res.send("Hello From Node.js");
+  res.render("index", { message: "Hello From Node.js" });
 });
 
 app.get("/contact", (req, res) => {
@@ -26,7 +26,7 @@ app.get("/about", (req, res) => {
   res.render("index", { message: "The About Page" });
 });
 
-app.get("/*", (req, res) => {
+app.use((req, res) => {
   res.status(404).render("index", { message: "Not Found" });
 });
 
