@@ -30,17 +30,8 @@ app.use((req, res) => {
   res.status(404).render("index", { message: "Not Found" });
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
-// Add error handling for the server
-const server = app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
-
-server.on("error", (error) => {
-  console.error("Server error:", error);
-});
-
-process.on("uncaughtException", (err) => {
-  console.error("Uncaught Exception:", err);
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
